@@ -1,4 +1,4 @@
-module UnavailableDates
+module UnavailableDate
   class Remove
     def initialize(user, from, to)
       @user = user

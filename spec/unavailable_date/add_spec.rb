@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe UnavailableDates::Add do
+RSpec.describe UnavailableDate::Add do
   let(:user) { create(:chef) }
 
   subject do
