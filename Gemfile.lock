@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    unavailability (0.1.1)
+    unavailability (0.1.0)
       activerecord (~> 5.0)
 
 GEM
