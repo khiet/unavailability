@@ -1,10 +1,14 @@
-class CreateUnavailableDates < ActiveRecord::Migration["#{ActiveRecord::VERSION::MAJOR}.#{ActiveRecord::VERSION::MINOR}"]
+class CreateUnavailableDates < ActiveRecord::Migration[5.2]
   def change
-    create_table :unavailabilities do |t|
-      t.date :from
-      t.date :to
+    create_table :unavailable_dates do |t|
+      t.date    :from
+      t.date    :to
+      t.integer :datable_id
+      t.string  :datable_type
 
-      t.timestamps null: false
+      t.timestamps
     end
+
+    add_index :unavailable_dates, [:datable_type, :datable_id]
   end
 end
