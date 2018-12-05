@@ -5,6 +5,9 @@ module Unavailability
         @datable = datable
         @from    = from
         @to      = to
+
+        raise ArgumentError.new('from has to be a Date') unless @from.is_a?(Date)
+        raise ArgumentError.new('to has to be a Date') unless @to.is_a?(Date)
       end
 
       def unavailable_dates

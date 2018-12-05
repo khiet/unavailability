@@ -8,6 +8,26 @@ RSpec.describe Unavailability::UnavailableDates::Remove do
   end
 
   describe '#call' do
+    context 'when from is not a Date' do
+      let(:date_range) do
+        double(from: '2049-12-28', to: Date.parse('2049-12-31'))
+      end
+
+      it 'raises an error' do
+        expect { subject.call }.to raise_error(ArgumentError, 'from has to be a Date')
+      end
+    end
+
+    context 'when to is not a Date' do
+      let(:date_range) do
+        double(from: Date.parse('2049-12-28'), to: '2049-12-30')
+      end
+
+      it 'raises an error' do
+        expect { subject.call }.to raise_error(ArgumentError, 'to has to be a Date')
+      end
+    end
+
     context 'when calendar has one unavailability' do
       before do
         single_unavailability(datable)
