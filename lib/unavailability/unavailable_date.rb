@@ -13,10 +13,6 @@ module Unavailability
       overlapping(from.to_date - 1, to.to_date + 1)
     end
 
-    def range
-      (from .. to)
-    end
-
     class << self
       def to_overlapped_by(from:)
         table[:to].gteq(from)

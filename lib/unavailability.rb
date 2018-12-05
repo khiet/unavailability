@@ -12,14 +12,18 @@ module Unavailability
       has_many :unavailable_dates, as: :datable, dependent: :destroy, class_name: 'Unavailability::UnavailableDate'
 
       scope :available_for_date, ->(date) do
-        where("NOT EXISTS (SELECT unavailable_dates.* FROM unavailable_dates WHERE unavailable_dates.datable_type = #{base} AND unavailable_dates.datable_id = #{base.table_name}s.id AND (unavailable_dates.from <= ? AND unavailable_dates.to >= ?))", date, date)
+        user_table  = arel_table
+        u_table     = Unavailability::UnavailableDate.arel_table
+        u_condition = u_table[:datable_id].eq(user_table[:id]).and(u_table[:from].lteq(date)).and(u_table[:to].gteq(date))
+
+        where(Unavailability::UnavailableDate.where(u_condition).exists.not)
       end
     end
   end
 
   def available_for_date?(date)
     unavailable_dates.each do |unavailable_date|
-      return false if unavailable_date.range.cover?(date)
+      return false if (unavailable_date.from..unavailable_date.to).cover?(date)
     end
 
     true
