@@ -10,10 +10,10 @@ ActiveRecord::Schema.define do
   create_table "unavailable_dates", force: :cascade do |t|
     t.date "from"
     t.date "to"
-    t.string "datable_type"
-    t.bigint "datable_id"
+    t.string "dateable_type"
+    t.bigint "dateable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["datable_type", "datable_id"], name: "index_unavailable_dates_on_datable_type_and_datable_id"
+    t.index ["dateable_type", "dateable_id"], name: "index_unavailable_dates_on_dateable_type_and_dateable_id"
   end
 end

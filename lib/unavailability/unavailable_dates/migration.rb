@@ -3,7 +3,7 @@ class CreateUnavailableDates < ActiveRecord::Migration[5.2]
     create_table :unavailable_dates do |t|
       t.date    :from
       t.date    :to
-      t.references :datable, polymorphic: true
+      t.references :dateable, polymorphic: true
 
       t.timestamps
     end

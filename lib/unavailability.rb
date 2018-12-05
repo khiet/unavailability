@@ -9,12 +9,12 @@ require 'unavailability/unavailable_dates/remove'
 module Unavailability
   def self.included(base)
     base.class_eval do
-      has_many :unavailable_dates, as: :datable, dependent: :destroy, class_name: 'Unavailability::UnavailableDate'
+      has_many :unavailable_dates, as: :dateable, dependent: :destroy, class_name: 'Unavailability::UnavailableDate'
 
       scope :available_for_date, ->(date) do
         user_table  = arel_table
         u_table     = Unavailability::UnavailableDate.arel_table
-        u_condition = u_table[:datable_id].eq(user_table[:id]).and(u_table[:from].lteq(date)).and(u_table[:to].gteq(date))
+        u_condition = u_table[:dateable_id].eq(user_table[:id]).and(u_table[:from].lteq(date)).and(u_table[:to].gteq(date))
 
         where(Unavailability::UnavailableDate.where(u_condition).exists.not)
       end

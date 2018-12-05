@@ -1,8 +1,8 @@
 module Unavailability
   module UnavailableDates
     class Add
-      def initialize(datable, from, to)
-        @datable = datable
+      def initialize(dateable, from, to)
+        @dateable = dateable
         @from    = from
         @to      = to
 
@@ -11,7 +11,7 @@ module Unavailability
       end
 
       def unavailable_dates
-        datable.unavailable_dates
+        dateable.unavailable_dates
       end
 
       def call
@@ -28,12 +28,12 @@ module Unavailability
           merge(overlappings)
         end
 
-        datable
+        dateable
       end
 
       private
 
-      attr_reader :datable, :from, :to
+      attr_reader :dateable, :from, :to
 
       def overlappings
         unavailable_dates.overlapping_including_nabour(from, to)

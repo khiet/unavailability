@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 RSpec.describe Unavailability::UnavailableDates::Remove do
-  let(:datable) { User.create(name: 'Paul') }
+  let(:dateable) { User.create(name: 'Paul') }
 
   subject do
-    described_class.new(datable, date_range.from, date_range.to)
+    described_class.new(dateable, date_range.from, date_range.to)
   end
 
   describe '#call' do
@@ -30,7 +30,7 @@ RSpec.describe Unavailability::UnavailableDates::Remove do
 
     context 'when calendar has one unavailability' do
       before do
-        single_unavailability(datable)
+        single_unavailability(dateable)
         subject.call
       end
 
@@ -129,7 +129,7 @@ RSpec.describe Unavailability::UnavailableDates::Remove do
 
     context 'when calendar has two unavailable_dates' do
       before do
-        two_unavailability(datable)
+        two_unavailability(dateable)
         subject.call
       end
 
@@ -147,7 +147,7 @@ RSpec.describe Unavailability::UnavailableDates::Remove do
 
     context 'when calendar has three unavailable_dates' do
       before do
-        three_unavailability(datable)
+        three_unavailability(dateable)
 
         subject.call
       end
@@ -169,18 +169,18 @@ RSpec.describe Unavailability::UnavailableDates::Remove do
     end
   end
 
-  def single_unavailability(datable)
-    datable.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
+  def single_unavailability(dateable)
+    dateable.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
   end
 
-  def two_unavailability(datable)
-    datable.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
-    datable.unavailable_dates.create(from: '2050-01-06', to: '2050-01-09')
+  def two_unavailability(dateable)
+    dateable.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
+    dateable.unavailable_dates.create(from: '2050-01-06', to: '2050-01-09')
   end
 
-  def three_unavailability(datable)
-    datable.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
-    datable.unavailable_dates.create(from: '2050-01-06', to: '2050-01-09')
-    datable.unavailable_dates.create(from: '2050-01-11', to: '2050-01-14')
+  def three_unavailability(dateable)
+    dateable.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
+    dateable.unavailable_dates.create(from: '2050-01-06', to: '2050-01-09')
+    dateable.unavailable_dates.create(from: '2050-01-11', to: '2050-01-14')
   end
 end
