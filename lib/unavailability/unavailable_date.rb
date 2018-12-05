@@ -6,7 +6,7 @@ module Unavailability
     # validates :datable, uniqueness: { scope: [:from, :to] }
 
     scope :overlapping, ->(from, to) do
-      where("'unavailable_dates'.'from' <= ? AND 'unavailable_dates'.'to' >= ?", to, from)
+      where(from_overlapped_by(to: to)).where(to_overlapped_by(from: from))
     end
 
     scope :overlapping_including_nabour, ->(from, to) do
@@ -15,6 +15,20 @@ module Unavailability
 
     def range
       (from .. to)
+    end
+
+    class << self
+      def to_overlapped_by(from:)
+        table[:to].gteq(from)
+      end
+
+      def from_overlapped_by(to:)
+        table[:from].lteq(to)
+      end
+
+      def table
+        Unavailability::UnavailableDate.arel_table
+      end
     end
   end
 end
