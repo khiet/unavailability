@@ -10,7 +10,6 @@ Gem::Specification.new do |spec|
   spec.email         = ["khiet.le@ehochef.com"]
 
   spec.summary       = %q{Manage availabilities of a Model}
-  spec.description   = %q{Manage availabilities of a Model}
   spec.homepage      = "https://github.com/khiet/unavailability"
   spec.license       = "MIT"
 
@@ -23,10 +22,14 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'activerecord', '~> 5.0'
 
-  spec.add_development_dependency 'railties', '>= 4.0'
+  spec.add_development_dependency 'railties', "~> 5.0"
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "byebug"
-  spec.add_development_dependency "sqlite3"
+  spec.add_development_dependency "byebug", "~> 10.0"
+  spec.add_development_dependency "sqlite3", "~> 1.3"
+
+  spec.description = <<-EOM
+    Unavailability simply adds a capability to manage availabilities.
+  EOM
 end
