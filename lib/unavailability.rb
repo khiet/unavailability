@@ -28,4 +28,12 @@ module Unavailability
 
     true
   end
+
+  def make_unavailable(from:, to:)
+    Unavailability::UnavailableDates::Add.new(self, from, to).call
+  end
+
+  def make_available(from:, to:)
+    Unavailability::UnavailableDates::Remove.new(self, from, to).call
+  end
 end

@@ -30,6 +30,34 @@ RSpec.describe Unavailability do
     end
   end
 
+  describe '#make_available' do
+    let(:dateable) { User.create(name: 'Ringo') }
+    let(:from)     { Date.parse('2050-01-01') }
+    let(:to)       { Date.parse('2050-01-05') }
+    let(:remover)  { double(:call) }
+
+    it 'makes date available' do
+      allow(Unavailability::UnavailableDates::Remove).to receive(:new).with(dateable, from, to).and_return(remover)
+      expect(remover).to receive(:call)
+
+      dateable.make_available(from: from, to: to)
+    end
+  end
+
+  describe '#make_unavailable' do
+    let(:dateable) { User.create(name: 'Ringo') }
+    let(:from)     { Date.parse('2050-01-01') }
+    let(:to)       { Date.parse('2050-01-05') }
+    let(:adder)    { double(:call) }
+
+    it 'makes date unavailable' do
+      allow(Unavailability::UnavailableDates::Add).to receive(:new).with(dateable, from, to).and_return(adder)
+      expect(adder).to receive(:call)
+
+      dateable.make_unavailable(from: from, to: to)
+    end
+  end
+
   describe '.available_for_date' do
     let(:dateable_1) { User.create(name: 'George') }
     let(:dateable_2) { User.create(name: 'John') }
