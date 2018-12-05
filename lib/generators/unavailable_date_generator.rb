@@ -1,7 +1,7 @@
 require 'rails/generators/active_record'
 
 class UnavailableDateGenerator < ActiveRecord::Generators::Base
-  source_root File.expand_path('../../unavailable_date', __FILE__)
+  source_root File.expand_path('../../unavailability/unavailable_dates', __FILE__)
 
   desc 'TODO desc'
 

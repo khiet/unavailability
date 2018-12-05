@@ -4,6 +4,7 @@ require 'active_record'
 
 require 'unavailability/unavailable_date'
 require 'unavailability/unavailable_dates/add'
+require 'unavailability/unavailable_dates/remove'
 
 module Unavailability
   def self.included(base)

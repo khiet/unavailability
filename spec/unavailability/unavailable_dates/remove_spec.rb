@@ -1,14 +1,16 @@
-RSpec.describe UnavailableDates::Remove do
-  let(:user) { create(:chef) }
+require 'spec_helper'
+
+RSpec.describe Unavailability::UnavailableDates::Remove do
+  let(:datable) { User.create(name: 'Paul') }
 
   subject do
-    described_class.new(user, date_range.from, date_range.to)
+    described_class.new(datable, date_range.from, date_range.to)
   end
 
   describe '#call' do
     context 'when calendar has one unavailability' do
       before do
-        single_unavailability(user)
+        single_unavailability(datable)
         subject.call
       end
 
@@ -107,7 +109,7 @@ RSpec.describe UnavailableDates::Remove do
 
     context 'when calendar has two unavailable_dates' do
       before do
-        two_unavailability(user)
+        two_unavailability(datable)
         subject.call
       end
 
@@ -125,7 +127,7 @@ RSpec.describe UnavailableDates::Remove do
 
     context 'when calendar has three unavailable_dates' do
       before do
-        three_unavailability(user)
+        three_unavailability(datable)
 
         subject.call
       end
@@ -147,18 +149,18 @@ RSpec.describe UnavailableDates::Remove do
     end
   end
 
-  def single_unavailability(user)
-    user.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
+  def single_unavailability(datable)
+    datable.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
   end
 
-  def two_unavailability(user)
-    user.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
-    user.unavailable_dates.create(from: '2050-01-06', to: '2050-01-09')
+  def two_unavailability(datable)
+    datable.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
+    datable.unavailable_dates.create(from: '2050-01-06', to: '2050-01-09')
   end
 
-  def three_unavailability(user)
-    user.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
-    user.unavailable_dates.create(from: '2050-01-06', to: '2050-01-09')
-    user.unavailable_dates.create(from: '2050-01-11', to: '2050-01-14')
+  def three_unavailability(datable)
+    datable.unavailable_dates.create(from: '2050-01-01', to: '2050-01-04')
+    datable.unavailable_dates.create(from: '2050-01-06', to: '2050-01-09')
+    datable.unavailable_dates.create(from: '2050-01-11', to: '2050-01-14')
   end
 end
