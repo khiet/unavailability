@@ -1,5 +1,5 @@
 module Unavailability
-  module UnavailableDate
+  module UnavailableDates
     class Add
       def initialize(user, from, to)
         @user = user

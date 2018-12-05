@@ -1,4 +1,4 @@
-RSpec.describe UnavailableDate::Remove do
+RSpec.describe UnavailableDates::Remove do
   let(:user) { create(:chef) }
 
   subject do

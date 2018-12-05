@@ -3,6 +3,7 @@ require "unavailability/version"
 require 'active_record'
 
 require 'unavailability/unavailable_date'
+require 'unavailability/unavailable_dates/add'
 
 module Unavailability
   def self.included(base)
