@@ -16,7 +16,7 @@ module Unavailability
         u_table     = Unavailability::UnavailableDate.arel_table
         u_condition = u_table[:dateable_id].eq(user_table[:id]).and(u_table[:from].lteq(date)).and(u_table[:to].gteq(date))
 
-        where(Unavailability::UnavailableDate.where(u_condition).exists.not)
+        where(Unavailability::UnavailableDate.where(u_condition).arel.exists.not)
       end
     end
   end
