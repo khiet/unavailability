@@ -3,7 +3,6 @@ module Unavailability
     belongs_to :dateable, polymorphic: true
 
     validates :from, :to, :dateable, presence: true
-    # validates :dateable, uniqueness: { scope: [:from, :to] }
 
     scope :overlapping, ->(from, to) do
       where(from_overlapped_by(to: to)).where(to_overlapped_by(from: from))
